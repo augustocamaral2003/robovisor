@@ -2,6 +2,19 @@
 workspace pra desenvolver código ROS2 para o projeto de iniciação científica MAI/DAI Robovisor 
 2023 sob supervisão do Prof. Dr. Roberto Inoue
 
+## install
+
+
+criar um workspace ros2:
+```
+$ mkdir -p robovisor_ws/src
+$ cd robovisor_ws
+$ colcon build
+$ cd src
+```
+clonar o workspace localmente com ```git clone git@github.com:augustocamaral2003/robovisor.git```.
+compilar novamente o ambiente com ```colcon build --symlink-install``` em ```robovisor_ws```.
+
 ## estrutura
 
 - **urdf**
@@ -10,27 +23,27 @@ workspace pra desenvolver código ROS2 para o projeto de iniciação científica
 
 - **rviz**
   
-  contém configs para visualização no rviz
+  contém configs para visualização no rviz.
 
 - **maps**
   
-  contém mapas para execução no Gazebo
+  contém mapas para execução no Gazebo.
 
 - **launch**
   
-  contém launch files
+  contém launch files.
 
 - **config**
   
-  contém configs para o slam_toolbox
+  contém configs para o slam_toolbox.
 
 ## launch files
 
 - ```ros2 launch robovisor robovisor_sp.launch.py```
 
   inicia robot_state_publisher e rviz para visualização do robô (no momento com erro ao calcular o
-  transfer das rodas, apenas mostra visualização correta no rviz com Gazebo aberto
+  transfer das rodas, apenas mostra visualização correta no rviz com Gazebo aberto.
 
 - ```ros2 launch robovisor gazebo.launch.py world:=maps/maze.world```
 
-  inicia Gazebo e carrega mapa labirinto
+  inicia Gazebo e carrega mapa labirinto.
