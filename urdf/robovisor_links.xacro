@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+			</geometry>
+			<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+			<material name="body_color">
+				<color rgba="${body_color}"/>
+			</material>
+		</visual>
+		
+		<collision>
+			<geometry>
+				<box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+			</geometry>
+			<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+		</collision>
+
+		<xacro:inertial_box mass="1" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+			<origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+		</xacro:inertial_box>
+	</link>
+
+	<link name="left_wheel">
+		<visual>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+			</geometry>
+			<material name="wheel_color">
+				<color rgba="${wheel_color}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${wheel_radius}" length="${wheel_width}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<link name="right_wheel">
+		<visual>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+			</geometry>
+			<material name="wheel_color">
+				<color rgba="${wheel_color}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${wheel_radius}" length="${wheel_width}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<link name="front_wheel">
+		<visual>
+			<geometry>
+				<sphere radius="${wheel_radius/2}"/>
+			</geometry>
+			<material name="wheel_color">
+				<color rgba="${wheel_color}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<sphere radius="${wheel_radius/2}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_sphere mass="1" radius="${wheel_radius/2}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_sphere>
+	</link>
+
+	<link name="lidar_link">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				 <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+			</geometry>
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				 <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="0.125" length="${lidar_length}" radius="${lidar_radius}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<link name="lidar_support">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+			</geometry>
+			<material name="support_color">
+				<color rgba="${support_color}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="0.125" length="${lidar_length}" radius="${lidar_radius}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+</robot>

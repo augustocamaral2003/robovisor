@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<!-- header -->
+	<xacro:include filename="robovisor_include.xacro"/>
+
+	<!-- gazebo macros -->
+	<xacro:include filename="robovisor_gazebo.xacro"/>
+
+	<!-- links -->
+	<xacro:include filename="robovisor_links.xacro"/>
+
+	<!-- joints -->
+	<xacro:include filename="robovisor_joints.xacro"/>
+
+</robot>
