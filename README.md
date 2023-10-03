@@ -2,8 +2,16 @@
 workspace pra desenvolver código ROS2 para o projeto de iniciação científica MAI/DAI Robovisor 
 2023 sob supervisão do Prof. Dr. Roberto Inoue
 
-## install
+## dependências
 
+instalar as dependências Gazebo e slam_toolbox
+
+```
+$ sudo apt install ros-iron-gazebo*
+$ sudo apt install ros-iron-slam-toolbox
+```
+
+## instalação
 
 criar um workspace ros2:
 ```
