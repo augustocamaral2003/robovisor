@@ -9,7 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
 	rviz_robot = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_sp.launch.py']),
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
 		launch_arguments={'use_sim_time': 'true'}.items()
 	)
 
