@@ -13,7 +13,7 @@ def generate_launch_description():
 
     # Processar arquivo xacro para urdf
     doc = xacro.process_file(xacro_file)
-    urdf = doc.toxml()
+    urdf = doc.toprettyxml(indent='  ')
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',

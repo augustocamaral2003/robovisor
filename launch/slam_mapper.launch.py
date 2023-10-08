@@ -15,7 +15,7 @@ def generate_launch_description():
 
 	slam = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('slam_toolbox'), '/launch', '/online_async_launch.py']),
-		launch_arguments={'use_sim_time': 'true'}.items()
+		launch_arguments={'use_sim_time': 'true', 'params_file': 'config/mapper_params_online_async.yaml'}.items()
 	)
 
 	return LaunchDescription([
