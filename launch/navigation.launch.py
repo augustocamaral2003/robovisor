@@ -43,7 +43,7 @@ def generate_launch_description():
     )
 
     gazebo = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']),
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/gazebo_simulator.launch.py']),
 		launch_arguments={'use_sim_time': 'true', 'gui': 'false'}.items()
 	)
 
