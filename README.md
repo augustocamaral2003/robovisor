@@ -35,7 +35,7 @@ compilar novamente o ambiente com ```colcon build --symlink-install``` em ```rob
 
 - **maps**
   
-  contém mapas para execução no Gazebo.
+  contém mapas salvos mapeados por SLAM.
 
 - **launch**
   
@@ -43,7 +43,11 @@ compilar novamente o ambiente com ```colcon build --symlink-install``` em ```rob
 
 - **config**
   
-  contém configs para o slam_toolbox.
+  contém configs para o slam_toolbox e Nav2.
+
+- **worlds**
+
+  contém mapas salvos para excecução no Gazebo.
 
 ## launch files
 
@@ -52,6 +56,14 @@ compilar novamente o ambiente com ```colcon build --symlink-install``` em ```rob
   inicia robot_state_publisher e rviz para visualização do robô (no momento com erro ao calcular o
   transfer das rodas, apenas mostra visualização correta no rviz com Gazebo aberto.
 
-- ```ros2 launch robovisor gazebo.launch.py world:=maps/maze.world```
+- ```ros2 launch robovisor gazebo.launch.py world:=maps/barrier.world```
 
-  inicia Gazebo e carrega mapa labirinto.
+  inicia Gazebo e carrega mapa.
+
+- ```ros2 launch robovisor slam_mapper.launch.py use_sim_time:=true```
+
+  inicia mapeamento SLAM.
+
+- ```ros2 launch robovisor navigation.launch.py use_sim_time:=true maps:=map/barrier.yaml gui:=false```
+
+  inicia simulador Gazebo (sem GUI), carrega o mapa salvo em ```maps/barrier.yaml``` e inicia módulos de navegação.
