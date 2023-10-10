@@ -9,6 +9,8 @@ instalar as dependências Gazebo e slam_toolbox
 ```
 $ sudo apt install ros-iron-gazebo*
 $ sudo apt install ros-iron-slam-toolbox
+$ sudo apt install ros-iron-navigation2
+$ sudo apt install ros-iron-nav2*
 ```
 
 ## instalação
