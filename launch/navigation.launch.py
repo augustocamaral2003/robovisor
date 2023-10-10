@@ -14,9 +14,8 @@ def generate_launch_description():
 
     map_yaml_file = LaunchConfiguration('map')
     use_sim_time = LaunchConfiguration('use_sim_time')
-    autostart = LaunchConfiguration('autostart')
     params_file = LaunchConfiguration('params_file')
-    lifecycle_nodes = ['map_server', 'amcl']
+    slam_params_file = LaunchConfiguration('slam_params_file')
 
     map_arg = DeclareLaunchArgument(
         'map',
@@ -32,35 +31,33 @@ def generate_launch_description():
         'params_file',
         default_value=os.path.join(bringup_dir, 'config', 'nav2_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
-
-    map_server_node = Node(
-        package='nav2_map_server',
-        executable='map_server',
-        name='map_server',
-        output='screen',
-        parameters=[{'yaml_filename': map_yaml_file, 'use_sim_time': use_sim_time}],
-        remappings=[('/tf', 'tf')]
+    
+    slam_params_file_arg = DeclareLaunchArgument(
+        'slam_params_file',
+        default_value=os.path.join(bringup_dir, 'config', 'localization_params.yaml'),
+        description='Full path to the ROS2 parameters file to use for all launched nodes')
+    
+    slam = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('slam_toolbox'), '/launch', '/online_async_launch.py']),
+		launch_arguments={'use_sim_time': use_sim_time, 'slam_params_file': slam_params_file}.items()   
     )
 
-    amcl_node = Node(
-        package='nav2_amcl',
-        executable='amcl',
-        name='amcl',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}, {'node_names': lifecycle_nodes}],
-    )
+    gazebo = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/gazebo_simulator.launch.py']),
+		launch_arguments={'use_sim_time': 'true', 'gui': 'false'}.items()
+	)
 
-    lifecycle_node = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        name='lifecycle_manager',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}, {'node_names': lifecycle_nodes}],
+    nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([FindPackageShare('nav2_bringup'), '/launch', '/bringup_launch.py']),
+        launch_arguments={'map': map_yaml_file, 'use_sim_time': use_sim_time, 'params_file': params_file}.items()
     )
 
     return LaunchDescription([
         map_arg,
+        params_file_arg,
+        slam_params_file_arg,
         sim_time_arg,
-        map_server_node,
-        amcl_node
+        gazebo,
+        slam,
+        nav2
     ])
