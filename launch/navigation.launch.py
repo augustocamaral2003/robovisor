@@ -39,7 +39,12 @@ def generate_launch_description():
     
     slam = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('slam_toolbox'), '/launch', '/online_async_launch.py']),
-		launch_arguments={'use_sim_time': 'true', 'slam_params_file': slam_params_file}.items()
+		launch_arguments={'use_sim_time': use_sim_time, 'slam_params_file': slam_params_file}.items()   
+    )
+
+    gazebo = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']),
+		launch_arguments={'use_sim_time': 'true', 'gui': 'false'}.items()
 	)
 
     nav2 = IncludeLaunchDescription(
@@ -52,6 +57,7 @@ def generate_launch_description():
         params_file_arg,
         slam_params_file_arg,
         sim_time_arg,
+        gazebo,
         slam,
         nav2
     ])
