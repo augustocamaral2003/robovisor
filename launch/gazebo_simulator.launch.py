@@ -15,7 +15,7 @@ def generate_launch_description():
 	default_world = os.path.join(get_package_share_directory('robovisor'), 'worlds', 'barrier.world')
 	declare_world = DeclareLaunchArgument('world', default_value=default_world, description='Gazebo world file')
 
-	rviz_robot = IncludeLaunchDescription(
+	rsp = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
 		launch_arguments={'use_sim_time': 'true'}.items()
 	)
@@ -34,7 +34,7 @@ def generate_launch_description():
 
 	return LaunchDescription([
 		declare_world,
-		rviz_robot,
+		rsp,
 		gazebo,
 		spawn_entity
 	])

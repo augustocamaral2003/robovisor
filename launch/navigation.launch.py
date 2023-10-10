@@ -16,6 +16,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     params_file = LaunchConfiguration('params_file')
     slam_params_file = LaunchConfiguration('slam_params_file')
+    rviz_config_file = LaunchConfiguration('rviz_config_file')
 
     map_arg = DeclareLaunchArgument(
         'map',
@@ -37,6 +38,11 @@ def generate_launch_description():
         default_value=os.path.join(bringup_dir, 'config', 'localization_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
     
+    rviz_config_file_arg = DeclareLaunchArgument(
+        'rviz_config_file',
+        default_value=os.path.join(bringup_dir, 'rviz', 'nav2.rviz'),
+        description='Full path to the RVIZ config file to use')
+    
     slam = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('slam_toolbox'), '/launch', '/online_async_launch.py']),
 		launch_arguments={'use_sim_time': use_sim_time, 'slam_params_file': slam_params_file}.items()   
@@ -44,7 +50,7 @@ def generate_launch_description():
 
     gazebo = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/gazebo_simulator.launch.py']),
-		launch_arguments={'use_sim_time': 'true', 'gui': 'false'}.items()
+		launch_arguments={'use_sim_time': 'true', 'gui': 'false', 'rviz_config_file': rviz_config_file}.items()
 	)
 
     nav2 = IncludeLaunchDescription(
@@ -57,6 +63,7 @@ def generate_launch_description():
         params_file_arg,
         slam_params_file_arg,
         sim_time_arg,
+        rviz_config_file_arg,
         gazebo,
         slam,
         nav2

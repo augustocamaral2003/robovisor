@@ -1,19 +1,27 @@
 import os
 import xacro
 from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
+
     # Diretórios e arquivos
     robovisor_dir = get_package_share_directory('robovisor')
     xacro_file = os.path.join(robovisor_dir, 'urdf', 'robovisor.urdf.xacro')
-    rviz_config_file = os.path.join(robovisor_dir, 'rviz', 'view.rviz')
+
+    rviz_config_file = LaunchConfiguration('rviz_config_file')
+    rviz_config_file_arg = DeclareLaunchArgument('rviz_config_file', 
+                                            default_value=os.path.join(robovisor_dir, 'rviz', 'view.rviz'), 
+                                            description='Full path to the RViz config file to use')
+
 
     # Processar arquivo xacro para urdf
     doc = xacro.process_file(xacro_file)
-    urdf = doc.toprettyxml(indent='  ')
+    urdf = doc.toxml()
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -33,6 +41,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        rviz_config_file_arg,
         robot_state_publisher_node,
         rviz_node
     ])
