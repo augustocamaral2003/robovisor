@@ -10,19 +10,24 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
-	# default world
 	world = LaunchConfiguration('world')
-	default_world = os.path.join(get_package_share_directory('robovisor'), 'worlds', 'barrier.world')
-	declare_world = DeclareLaunchArgument('world', default_value=default_world, description='Gazebo world file')
+	world_arg = DeclareLaunchArgument('world', 
+									default_value=os.path.join(get_package_share_directory('robovisor'), 'worlds', 'barrier.world'), 
+									description='Gazebo world file')
+	
+	use_sim_time = LaunchConfiguration('use_sim_time')
+	use_sim_time_arg = DeclareLaunchArgument('use_sim_time', 
+											default_value='true', 
+											description='Use simulation (Gazebo) clock if true') 
 
 	rsp = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
-		launch_arguments={'use_sim_time': 'true'}.items()
+		launch_arguments={'use_sim_time': use_sim_time}.items()
 	)
 
 	gazebo = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']),
-		launch_arguments={'use_sim_time': 'true'}.items()
+		launch_arguments={'use_sim_time': use_sim_time, 'world': world}.items()
 	)
 
 	spawn_entity = Node(
@@ -33,7 +38,8 @@ def generate_launch_description():
 	)
 
 	return LaunchDescription([
-		declare_world,
+		world_arg,
+		use_sim_time_arg,
 		rsp,
 		gazebo,
 		spawn_entity
