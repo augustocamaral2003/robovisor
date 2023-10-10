@@ -67,6 +67,7 @@ def generate_launch_description():
 		map_file_arg,
 		params_file_arg,
 		slam_params_file_arg,
+		gazebo_gui_arg,
 		sim_time_arg,
 		rviz_config_file_arg,
 		gazebo,

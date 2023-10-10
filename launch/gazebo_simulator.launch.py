@@ -18,7 +18,13 @@ def generate_launch_description():
 	use_sim_time = LaunchConfiguration('use_sim_time')
 	use_sim_time_arg = DeclareLaunchArgument('use_sim_time', 
 											default_value='true', 
-											description='Use simulation (Gazebo) clock if true') 
+											description='Use simulation (Gazebo) clock if true')
+	
+	gazebo_gui = LaunchConfiguration('gui')
+	gazebo_gui_arg = DeclareLaunchArgument(
+		'gui',
+		default_value='false',
+		description='Flag to enable/disable GUI for Gazebo')
 
 	rsp = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
@@ -27,7 +33,7 @@ def generate_launch_description():
 
 	gazebo = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time, 'world': world}.items()
+		launch_arguments={'use_sim_time': use_sim_time, 'world': world, 'gui': gazebo_gui}.items()
 	)
 
 	spawn_entity = Node(
@@ -40,6 +46,7 @@ def generate_launch_description():
 	return LaunchDescription([
 		world_arg,
 		use_sim_time_arg,
+		gazebo_gui_arg,
 		rsp,
 		gazebo,
 		spawn_entity
