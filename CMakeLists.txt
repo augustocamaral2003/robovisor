@@ -30,7 +30,6 @@ install(DIRECTORY
   maps
   worlds
   config
-  bt
   DESTINATION share/${PROJECT_NAME}/
 )
 
