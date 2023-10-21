@@ -24,6 +24,11 @@ def generate_launch_description():
 											default_value='true', 
 											description='Use simulation (Gazebo) clock if true')
 
+	joint_state_publisher = LaunchConfiguration('joint_state_publisher')
+	joint_state_publisher_arg = DeclareLaunchArgument('joint_state_publisher', 
+											default_value='true', 
+											description='Use joint_state_publisher if true')
+
 	# Processar arquivo xacro para urdf
 	doc = xacro.process_file(xacro_file)
 	urdf = doc.toxml() # type: ignore
@@ -43,6 +48,15 @@ def generate_launch_description():
 		output='screen',
 		parameters=[{'use_sim_time': use_sim_time}],
 		arguments=['-d', rviz_config_file]
+	)
+
+	joint_state_publisher_node = Node(
+		package='joint_state_publisher',
+		executable='joint_state_publisher',
+		name='joint_state_publisher',
+		output='screen',
+		condition=IfCondition(joint_state_publisher),
+		parameters=[{'use_sim_time': use_sim_time}]
 	)
 
 	return LaunchDescription([

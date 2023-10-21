@@ -28,7 +28,7 @@ def generate_launch_description():
 
 	rsp = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time}.items()
+		launch_arguments={'use_sim_time': use_sim_time, 'joint_state_publisher': 'false'}.items()
 	)
 
 	gazebo = IncludeLaunchDescription(
