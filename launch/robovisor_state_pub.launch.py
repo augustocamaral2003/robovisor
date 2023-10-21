@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 
@@ -62,6 +63,8 @@ def generate_launch_description():
 	return LaunchDescription([
 		use_sim_time_arg,
 		rviz_config_file_arg,
+		joint_state_publisher_arg,
 		robot_state_publisher_node,
+		joint_state_publisher_node,
 		rviz_node
 	])
