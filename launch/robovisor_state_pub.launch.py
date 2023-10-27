@@ -27,7 +27,7 @@ def generate_launch_description():
 
 	joint_state_publisher = LaunchConfiguration('joint_state_publisher')
 	joint_state_publisher_arg = DeclareLaunchArgument('joint_state_publisher', 
-											default_value='true', 
+											default_value='false', 
 											description='Use joint_state_publisher if true')
 
 	# Processar arquivo xacro para urdf
