@@ -37,7 +37,6 @@ def generate_launch_description():
 	robot_state_publisher_node = Node(
 		package='robot_state_publisher',
 		executable='robot_state_publisher',
-		name='robot_state_publisher',
 		output='screen',
 		parameters=[{'robot_description': urdf}]
 	)
@@ -45,7 +44,6 @@ def generate_launch_description():
 	rviz_node = Node(
 		package='rviz2',
 		executable='rviz2',
-		name='rviz2',
 		output='screen',
 		parameters=[{'use_sim_time': use_sim_time}],
 		arguments=['-d', rviz_config_file]
@@ -54,7 +52,6 @@ def generate_launch_description():
 	joint_state_publisher_node = Node(
 		package='joint_state_publisher',
 		executable='joint_state_publisher',
-		name='joint_state_publisher',
 		output='screen',
 		condition=IfCondition(joint_state_publisher),
 		parameters=[{'use_sim_time': use_sim_time}]
