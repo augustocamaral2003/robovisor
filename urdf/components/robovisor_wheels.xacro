@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<link name="left_wheel_link">
+		<visual>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+			</geometry>
+			<material name="wheel_color">
+				<color rgba="${black}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${wheel_radius}" length="${wheel_length}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<link name="right_wheel_link">
+		<visual>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+			</geometry>
+			<material name="wheel_color">
+				<color rgba="${black}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+			</geometry>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${wheel_radius}" length="${wheel_length}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<joint name="left_wheel_joint" type="continuous">
+		<parent link="left_driver_link"/>
+		<child link="left_wheel_link"/>
+		<origin xyz="0 0 ${driver_length/2}" rpy="0 0 0"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+
+	<joint name="right_wheel_joint" type="continuous">
+		<parent link="right_driver_link"/>
+		<child link="right_wheel_link"/>
+		<origin xyz="0 0 -${driver_length/2}" rpy="0 0 0"/>
+		<axis xyz="0 0 -1"/>
+	</joint>
+
+</robot>

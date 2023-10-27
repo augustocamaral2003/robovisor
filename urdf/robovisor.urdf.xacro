@@ -1,16 +1,23 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
 
-	<!-- header -->
-	<xacro:include filename="robovisor_include.xacro"/>
+	<!-- includes -->
+	<xacro:include filename="includes/*"/>
 
-	<!-- gazebo macros -->
-	<xacro:include filename="robovisor_gazebo.xacro"/>
+	<!-- gazebo -->
+	<xacro:include filename="gazebo/*"/>
 
-	<!-- links -->
-	<xacro:include filename="robovisor_links.xacro"/>
+	<!-- components -->
+	<xacro:include filename="components/*"/>
+	
+	<link name="base_footprint"/>
 
-	<!-- joints -->
-	<xacro:include filename="robovisor_joints.xacro"/>
+	<link name="base_link"/>
+
+	<joint name="base_footprint_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="base_footprint"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+	</joint>
 
 </robot>

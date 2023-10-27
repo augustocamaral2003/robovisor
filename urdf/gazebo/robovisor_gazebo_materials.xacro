@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<gazebo reference="chassis">
+		<material>Gazebo/${white}</material>
+	</gazebo>
+	
+	<gazebo reference="left_wheel">
+		<material>Gazebo/${black}</material>
+	</gazebo>
+
+	<gazebo reference="right_wheel">
+		<material>Gazebo/${black}</material>
+	</gazebo>
+	
+	<gazebo reference="left_driver">
+		<material>Gazebo/${grey}</material>
+	</gazebo>
+
+	<gazebo reference="left_driver">
+		<material>Gazebo/${grey}</material>
+	</gazebo>
+
+</robot>

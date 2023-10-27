@@ -1,30 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
 
-	<gazebo reference="chassis">
-		<material>Gazebo/${body_color}</material>
-	</gazebo>
-	
-	<gazebo reference="left_wheel">
-		<material>Gazebo/${wheel_color}</material>
-	</gazebo>
-
-	<gazebo reference="right_wheel">
-		<material>Gazebo/${wheel_color}</material>
-	</gazebo>
-	
-	<gazebo reference="front_wheel">
-		<material>Gazebo/${wheel_color}</material>
-		<mu1 value="0.001"/>
-		<mu2 value="0.001"/>
-	</gazebo>
-
 	<gazebo>
 		<plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
 			<left_joint>left_wheel_joint</left_joint>
 			<right_joint>right_wheel_joint</right_joint>
 
-			<wheel_separation>${chassis_width}</wheel_separation>
+			<wheel_separation>${chassis_radius*2 - wheel_length}</wheel_separation>
 			<wheel_diameter>${2*wheel_radius}</wheel_diameter>
 
 			<max_wheel_torque>200</max_wheel_torque>
@@ -39,7 +21,7 @@
 		</plugin>
 	</gazebo>
 
-	<gazebo reference="lidar_link">
+	<gazebo reference="laser_link">
 		<sensor name="lidar" type="ray">
 			<pose> 0 0 0 0 0 0 </pose>
 			<visualize>true</visualize>
@@ -49,8 +31,8 @@
 				<scan>
 					<horizontal>
 						<samples>360</samples>
-						<min_angle>-3.14159265</min_angle>
-						<max_angle>3.14159265</max_angle>
+						<min_angle>-${pi/2}</min_angle>
+						<max_angle>${pi/2}</max_angle>
 					</horizontal>
 				</scan>
 				<range>
@@ -67,4 +49,15 @@
 			</plugin>
 		</sensor>
 	</gazebo>
+
+	<gazebo reference="caster_n_link">
+		<mu1>0.2</mu1>
+		<mu2>0.2</mu2>
+	</gazebo>
+
+	<gazebo reference="caster_s_link">
+		<mu1>0.2</mu1>
+		<mu2>0.2</mu2>
+	</gazebo>
+
 </robot>

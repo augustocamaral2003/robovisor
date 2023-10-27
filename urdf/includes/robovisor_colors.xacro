@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<xacro:property name="red" value="1.0 0.0 0.0 1.0"/>
+	<xacro:property name="green" value="0.0 1.0 0.0 1.0"/>
+	<xacro:property name="blue" value="0.0 0.0 1.0 1.0"/>
+	<xacro:property name="yellow" value="1.0 1.0 0.0 1.0"/>
+	<xacro:property name="orange" value="1.0 0.5 0.0 1.0"/>
+	<xacro:property name="purple" value="0.5 0.0 0.5 1.0"/>
+	<xacro:property name="white" value="1.0 1.0 1.0 1.0"/>
+	<xacro:property name="black" value="0.0 0.0 0.0 1.0"/>
+	<xacro:property name="grey" value="0.5 0.5 0.5 1.0"/>
+	<xacro:property name="brown" value="0.5 0.25 0.0 1.0"/>
+	<xacro:property name="pink" value="1.0 0.0 1.0 1.0"/>
+	<xacro:property name="cyan" value="0.0 1.0 1.0 1.0"/>
+	<xacro:property name="magenta" value="1.0 0.0 1.0 1.0"/>
+	<xacro:property name="silver" value="0.75 0.75 0.75 1.0"/>
+	<xacro:property name="gold" value="1.0 0.84 0.0 1.0"/>
+	<xacro:property name="maroon" value="0.5 0.0 0.0 1.0"/>
+	<xacro:property name="olive" value="0.5 0.5 0.0 1.0"/>
+	<xacro:property name="teal" value="0.0 0.5 0.5 1.0"/> 
+
+</robot>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<link name="left_driver_link">
+		<visual>
+			<geometry>
+				<cylinder radius="${driver_radius}" length="${driver_length}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="driver_color">
+				<color rgba="${grey}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${driver_radius}" length="${driver_length}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${driver_radius}" length="${driver_length}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<link name="right_driver_link">
+		<visual>
+			<geometry>
+				<cylinder radius="${driver_radius}" length="${driver_length}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="driver_color">
+				<color rgba="${grey}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<cylinder radius="${driver_radius}" length="${driver_length}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+
+		<xacro:inertial_cylinder mass="1" radius="${driver_radius}" length="${driver_length}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_cylinder>
+	</link>
+
+	<joint name="left_driver_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="left_driver_link"/>
+		<origin xyz="0 ${chassis_radius - driver_length/2 - wheel_length} ${driver_radius*2}" rpy="-${pi/2} 0 0"/>
+	</joint>
+
+	<joint name="right_driver_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="right_driver_link"/>
+		<origin xyz="0 -${chassis_radius - driver_length/2 - wheel_length} ${driver_radius*2}" rpy="${pi/2} 0 0"/>
+	</joint>
+
+</robot>

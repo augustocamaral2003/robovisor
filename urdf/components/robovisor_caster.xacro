@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<link name="caster_n_link">
+		<visual>
+			<geometry>
+				<sphere radius="${caster_radius}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="caster_color">
+				<color rgba="${black}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<sphere radius="${caster_radius}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+
+		<xacro:inertial_sphere mass="1" radius="${caster_radius}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_sphere>
+	</link>
+
+	<link name="caster_s_link">
+		<visual>
+			<geometry>
+				<sphere radius="${caster_radius}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="caster_color">
+				<color rgba="${black}"/>
+			</material>
+		</visual>
+
+		<collision>
+			<geometry>
+				<sphere radius="${caster_radius}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+
+		<xacro:inertial_sphere mass="1" radius="${caster_radius}">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:inertial_sphere>
+	</link>
+
+	<joint name="caster_n_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="caster_n_link"/>
+		<origin xyz="${3*chassis_radius/5} 0 0" rpy="0 0 0"/>
+	</joint>
+
+	<joint name="caster_s_joint" type="fixed">
+		<parent link="chassis_link"/>
+		<child link="caster_s_link"/>
+		<origin xyz="-${3*chassis_radius/5} 0 0" rpy="0 0 0"/>
+	</joint>
+
+</robot>

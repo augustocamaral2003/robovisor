@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robovisor">
+
+	<xacro:property name="chassis_radius" value="0.265"/>
+	<xacro:property name="chassis_length" value="0.015"/>
+
+	<xacro:property name="roof_radius" value="0.265"/>
+	<xacro:property name="roof_length" value="0.015"/>
+
+	<xacro:property name="wheel_radius" value="0.050"/>
+	<xacro:property name="wheel_length" value="0.015"/>
+
+	<xacro:property name="driver_length" value="0.050"/>
+	<xacro:property name="driver_radius" value="0.007"/>
+
+	<xacro:property name="laser_radius" value="0.020"/>
+	<xacro:property name="laser_length" value="0.050"/>
+
+	<xacro:property name="pillar_height" value="0.160"/>
+	<xacro:property name="pillar_length" value="0.015"/>
+	<xacro:property name="pillar_width" value="0.100"/>
+
+	<xacro:property name="caster_radius" value="${wheel_radius - driver_radius - chassis_length/2}"/>
+
+</robot>
