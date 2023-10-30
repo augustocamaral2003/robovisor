@@ -16,7 +16,7 @@ def generate_launch_description():
 
 	rviz_config_file = LaunchConfiguration('rviz_config_file')
 	rviz_config_file_arg = DeclareLaunchArgument('rviz_config_file', 
-											default_value=os.path.join(robovisor_dir, 'rviz', 'rsp.rviz'), 
+											default_value=os.path.join(robovisor_dir, 'rviz', 'view.rviz'), 
 											description='Full path to the RViz config file to use')
 
 
