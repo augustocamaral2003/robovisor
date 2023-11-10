@@ -32,8 +32,8 @@ def generate_launch_description():
 											description='Use simulation if true')
 
 	# Launches
-	gazebo = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/gazebo_simulator.launch.py']),
+	simulation_core = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/sim/simulation_core.launch.py']),
 		launch_arguments={'use_sim_time': use_sim_time, 'rviz_config_file': rviz_config_file}.items(),
 		condition=IfCondition(simulation)
 	)
