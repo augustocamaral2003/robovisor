@@ -47,6 +47,6 @@ def generate_launch_description():
 		use_sim_time_arg,
 		rviz_config_file_arg,
 		simulation_arg,
-		gazebo,
+		simulation_core,
 		slam
 	])
