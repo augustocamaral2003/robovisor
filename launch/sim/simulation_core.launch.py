@@ -10,6 +10,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
+	# Argumentos de lançamento
 	world = LaunchConfiguration('world')
 	world_arg = DeclareLaunchArgument('world', 
 									default_value=os.path.join(get_package_share_directory('robovisor'), 'worlds', 'barrier.world'), 
@@ -20,12 +21,13 @@ def generate_launch_description():
 											default_value='true', 
 											description='Use simulation (Gazebo) clock if true')
 	
-	gazebo_gui = LaunchConfiguration('gui')
+	gazebo_gui = LaunchConfiguration('gazebo_gui')
 	gazebo_gui_arg = DeclareLaunchArgument(
-		'gui',
+		'gazebo_gui',
 		default_value='false',
 		description='Flag to enable/disable GUI for Gazebo')
 
+	# Launches
 	rsp = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
 		launch_arguments={'use_sim_time': use_sim_time, 'joint_state_publisher': 'false'}.items()
@@ -42,6 +44,8 @@ def generate_launch_description():
 		arguments=['-topic', 'robot_description', '-entity', 'robovisor', '-z', '0.5'],
 		output='screen'
 	)
+
+
 
 	return LaunchDescription([
 		world_arg,
