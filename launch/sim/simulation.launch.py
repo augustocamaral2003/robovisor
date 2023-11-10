@@ -28,13 +28,8 @@ def generate_launch_description():
 		description='Flag to enable/disable GUI for Gazebo')
 
 	# Launches
-	rsp = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch', '/robovisor_state_pub.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time, 'joint_state_publisher': 'false'}.items()
-	)
-
 	gazebo = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']),
+		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch/gazebo.launch.py']),
 		launch_arguments={'use_sim_time': use_sim_time, 'world': world, 'gui': gazebo_gui}.items()
 	)
 
@@ -45,13 +40,10 @@ def generate_launch_description():
 		output='screen'
 	)
 
-
-
 	return LaunchDescription([
 		world_arg,
 		use_sim_time_arg,
 		gazebo_gui_arg,
-		rsp,
 		gazebo,
 		spawn_entity
 	])

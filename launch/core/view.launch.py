@@ -23,9 +23,14 @@ def generate_launch_description():
 
 	rviz_config_file = LaunchConfiguration('rviz_config_file')
 	rviz_config_file_arg = DeclareLaunchArgument('rviz_config_file',
-											default_value=os.path.join(bringup_dir, 'rviz', 'slam.rviz'),
+											default_value=os.path.join(bringup_dir, 'rviz', 'view.rviz'),
 											description='Full path to the RVIZ config file to use. Available: nav2, view, slam')
 
+	simulation = LaunchConfiguration('simulation')
+	simulation_arg = DeclareLaunchArgument('simulation',
+											default_value='true',
+											description='Use simulation if true')
+	
 	gazebo_gui = LaunchConfiguration('gazebo_gui')
 	gazebo_gui_arg = DeclareLaunchArgument('gazebo_gui',
 											default_value='false',
@@ -43,17 +48,11 @@ def generate_launch_description():
 		launch_arguments={'use_sim_time': use_sim_time, 'rviz_config_file': rviz_config_file}.items()
 	)
 
-	slam = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('slam_toolbox'), '/launch', '/online_async_launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time, 'params_file': 'config/mapper_params_online_async.yaml'}.items()
-	)
-
 	return LaunchDescription([
 		use_sim_time_arg,
 		rviz_config_file_arg,
-		simulation_arg,
 		gazebo_gui_arg,
+		simulation_arg,
 		simulation,
 		publisher,
-		slam
 	])
