@@ -30,11 +30,16 @@ def generate_launch_description():
 	simulation_arg = DeclareLaunchArgument('simulation',
 											default_value='true',
 											description='Use simulation if true')
+	
+	gazebo_gui = LaunchConfiguration('gazebo_gui')
+	gazebo_gui_arg = DeclareLaunchArgument('gazebo_gui',
+											default_value='false',
+											description='Flag to enable/disable GUI for Gazebo')
 
 	# Launches
 	simulation = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/sim/simulation.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time}.items(),
+		launch_arguments={'use_sim_time': use_sim_time, 'gazebo_gui': gazebo_gui}.items(),
 		condition=IfCondition(simulation)
 	)
 
@@ -46,6 +51,7 @@ def generate_launch_description():
 	return LaunchDescription([
 		use_sim_time_arg,
 		rviz_config_file_arg,
+		gazebo_gui_arg,
 		simulation_arg,
 		simulation,
 		publisher,

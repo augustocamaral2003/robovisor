@@ -26,16 +26,21 @@ def generate_launch_description():
 											default_value=os.path.join(bringup_dir, 'rviz', 'slam.rviz'),
 											description='Full path to the RVIZ config file to use. Available: nav2, view, slam')
 
-	simulation = LaunchConfiguration('simulation')
-	simulation_arg = DeclareLaunchArgument('simulation',
-											default_value='true',
-											description='Use simulation if true')
+	gazebo_gui = LaunchConfiguration('gazebo_gui')
+	gazebo_gui_arg = DeclareLaunchArgument('gazebo_gui',
+											default_value='false',
+											description='Flag to enable/disable GUI for Gazebo')
 
 	# Launches
-	simulation_core = IncludeLaunchDescription(
-		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/sim/simulation_core.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time, 'rviz_config_file': rviz_config_file}.items(),
+	simulation = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/sim/simulation.launch.py']),
+		launch_arguments={'use_sim_time': use_sim_time, 'gazebo_gui': gazebo_gui}.items(),
 		condition=IfCondition(simulation)
+	)
+
+	publisher = IncludeLaunchDescription(
+		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/core/publisher.launch.py']),
+		launch_arguments={'use_sim_time': use_sim_time, 'rviz_config_file': rviz_config_file}.items()
 	)
 
 	slam = IncludeLaunchDescription(
@@ -47,6 +52,8 @@ def generate_launch_description():
 		use_sim_time_arg,
 		rviz_config_file_arg,
 		simulation_arg,
-		simulation_core,
+		gazebo_gui_arg,
+		simulation,
+		publisher,
 		slam
 	])

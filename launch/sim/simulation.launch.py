@@ -40,8 +40,6 @@ def generate_launch_description():
 		output='screen'
 	)
 
-
-
 	return LaunchDescription([
 		world_arg,
 		use_sim_time_arg,
