@@ -31,11 +31,17 @@ def generate_launch_description():
 											default_value='false',
 											description='Flag to enable/disable GUI for Gazebo')
 
+	use_simulation = LaunchConfiguration('simulation')
+	use_simulation_arg = DeclareLaunchArgument('simulation',
+											default_value='true',
+											description='Use simulation if true')
+
+
 	# Launches
 	simulation = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('robovisor'), '/launch/sim/simulation.launch.py']),
 		launch_arguments={'use_sim_time': use_sim_time, 'gazebo_gui': gazebo_gui}.items(),
-		condition=IfCondition(simulation)
+		condition=IfCondition(use_simulation)
 	)
 
 	publisher = IncludeLaunchDescription(
@@ -51,7 +57,7 @@ def generate_launch_description():
 	return LaunchDescription([
 		use_sim_time_arg,
 		rviz_config_file_arg,
-		simulation_arg,
+		use_simulation_arg,
 		gazebo_gui_arg,
 		simulation,
 		publisher,
