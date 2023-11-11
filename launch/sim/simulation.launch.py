@@ -20,17 +20,11 @@ def generate_launch_description():
 	use_sim_time_arg = DeclareLaunchArgument('use_sim_time', 
 											default_value='true', 
 											description='Use simulation (Gazebo) clock if true')
-	
-	gazebo_gui = LaunchConfiguration('gazebo_gui')
-	gazebo_gui_arg = DeclareLaunchArgument(
-		'gazebo_gui',
-		default_value='false',
-		description='Flag to enable/disable GUI for Gazebo')
 
 	# Launches
 	gazebo = IncludeLaunchDescription(
 		PythonLaunchDescriptionSource([FindPackageShare('gazebo_ros'), '/launch/gazebo.launch.py']),
-		launch_arguments={'use_sim_time': use_sim_time, 'world': world, 'gui': gazebo_gui}.items()
+		launch_arguments={'use_sim_time': use_sim_time, 'world': world}.items()
 	)
 
 	spawn_entity = Node(
@@ -43,7 +37,6 @@ def generate_launch_description():
 	return LaunchDescription([
 		world_arg,
 		use_sim_time_arg,
-		gazebo_gui_arg,
 		gazebo,
 		spawn_entity
 	])
