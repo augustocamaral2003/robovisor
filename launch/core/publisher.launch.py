@@ -26,7 +26,7 @@ def generate_launch_description():
 											description='Use simulation (Gazebo) clock if true')
 
 	# Processar arquivo xacro para urdf
-	xacro_file = os.path.join(bringup_dir, 'urdf/robovisor.urdf.xacro')
+	xacro_file = os.path.join(bringup_dir, 'urdf/robo_dc/robo_dc.urdf.xacro')
 	doc = xacro.process_file(xacro_file)
 	urdf = doc.toxml()
 
