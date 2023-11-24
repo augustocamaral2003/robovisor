@@ -53,19 +53,22 @@ compilar novamente o ambiente com ```colcon build --symlink-install``` em ```rob
 
 ## launch files
 
-- ```ros2 launch robovisor robovisor_sp.launch.py```
+- ```ros2 launch robovisor publisher.launch.py```
 
-  inicia robot_state_publisher e rviz para visualização do robô (no momento com erro ao calcular o
-  transfer das rodas, apenas mostra visualização correta no rviz com Gazebo aberto.
+  inicia robot_state_publisher e rviz para visualização do robô.
 
-- ```ros2 launch robovisor gazebo.launch.py world:=maps/barrier.world```
+- ```ros2 launch robovisor view.launch.py```
 
-  inicia Gazebo e carrega mapa.
+  inicia visualizador do robô.
 
-- ```ros2 launch robovisor slam_mapper.launch.py use_sim_time:=true```
+- ```ros2 launch robovisor simulation.launch.py```
+
+  inicia Gazebo com mapa padrão, inicializa robô na simulação.
+
+- ```ros2 launch robovisor slam.launch.py use_sim_time:=true```
 
   inicia mapeamento SLAM.
 
-- ```ros2 launch robovisor navigation.launch.py use_sim_time:=true maps:=map/barrier.yaml gui:=false```
+- ```ros2 launch robovisor navigation.launch.py use_sim_time:=true```
 
-  inicia simulador Gazebo (sem GUI), carrega o mapa salvo em ```maps/barrier.yaml``` e inicia módulos de navegação.
+  inicia navegação com Nav2.
